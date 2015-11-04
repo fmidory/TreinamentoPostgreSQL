@@ -1,16 +1,16 @@
 Instalação do PostgreSQL via código fonte
 =========================================
 
-Este é um passo a passo para instalação do PostgreSQL (versão 9.3.4) via código-fonte utilizando as máquinas virtuais disponibilizadas no treinamento. No caso, a VM está utilizando Debian 6, mas há poucas diferenças para outras distribuições (no passo a passo comentamos ao menos para Ubuntu e CentOS/RHEL).
+Este é um passo a passo para instalação do PostgreSQL (versão 9.4.4) via código-fonte utilizando as máquinas virtuais disponibilizadas no treinamento. No caso, a VM está utilizando Debian 6, mas há poucas diferenças para outras distribuições (no passo a passo comentamos ao menos para Ubuntu e CentOS/RHEL).
 
 OBS: Linhas iniciadas com >>> são comentários ou saída de comandos. Linhas iniciadas com $ são usuários não privilegiados e começados com # são de root.
 
-OBS2: Para edição de arquivos, utilizamos o comando `gedit`, por ser uma interface mais amigável. Mas recomendo o uso do `vim` (para quem estiver disposto a aprender, =P ), pois o `gedit` não estará disponível em servidores sem ambiente gráfico.
+OBS2: Para edição de arquivos, utilizamos o comando `nano`, por ser uma interface mais amigável. Mas recomendo o uso do `vim` (para quem estiver disposto a aprender, =P ).
 
 Logar como root:
 
 	$ su - root
-	>>> Senha: 1234
+	>>> Senha: 1q2w3e
 
 OBS: Para alguns ambientes (como o padrão do Ubuntu), pode ser necessário usar: `sudo su - root`.
 
@@ -23,21 +23,21 @@ Para CentOS/RHEL: `yum install readline-devel zlib-devel gcc make`.
 Baixando, extraindo e compilando o PostgreSQL:
 
 	# cd /usr/local/src/
-	# wget http://ftp.postgresql.org/pub/source/v9.3.4/postgresql-9.3.4.tar.bz2
-	# tar xvf postgresql-9.3.4.tar.bz2
-	# cd postgresql-9.3.4/
-	# ./configure --prefix=/usr/local/pgsql-9.3.4
+	# wget http://ftp.postgresql.org/pub/source/v9.4.4/postgresql-9.4.4.tar.bz2
+	# tar xvf postgresql-9.4.4.tar.bz2
+	# cd postgresql-9.4.4/
+	# ./configure --prefix=/usr/local/pgsql-9.4.4
 	# make -j 2  # trocar 2 pelo número de cores
 	# make install
 
 Link simbólico (facilita administração e atualizações):
 
 	# cd /usr/local/
-	# ln -s pgsql-9.3.4/ pgsql
+	# ln -s pgsql-9.4.4/ pgsql
 
 Variáveis de ambiente:
 
-	# gedit /etc/profile
+	# nano /etc/profile
 	>>> Adicionar as linhas no final:
 	    export PATH=/usr/local/pgsql/bin:$PATH
 	    export LD_LIBRARY_PATH=/usr/local/pgsql/lib:$LD_LIBRARY_PATH
@@ -63,7 +63,7 @@ Criação do cluster:
 
 Script de inicialização:
 
-	# cp /usr/local/src/postgresql-9.3.4/contrib/start-scripts/linux /etc/init.d/postgresql
+	# cp /usr/local/src/postgresql-9.4.4/contrib/start-scripts/linux /etc/init.d/postgresql
 	# chmod a+x /etc/init.d/postgresql
 	# update-rc.d postgresql defaults
 
